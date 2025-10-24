@@ -1,0 +1,52 @@
+---
+import Toggle from '../components/Toggle.astro';
+import Develop from './develop.astro';
+import Edition from './edition.astro';
+---
+
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/archlinux/archlinux-original.svg">
+    <title>Portfolio – Moises Rebatta</title>
+  </head>
+  <body class="bg-slate-900 text-white font-sans">
+    <!-- HEADER -->
+    <header class="p-6 flex justify-between items-center border-b border-slate-700">
+      <h1 class="text-2xl font-bold">Moises Rebatta</h1>
+      <Toggle />
+    </header>
+
+    <!-- MAIN -->
+    <main class="max-w-5xl mx-auto p-6 space-y-12">
+      <Develop />
+      <Edition />
+
+    </main>
+
+    <!-- SCRIPT TOGGLE -->
+    <script>
+      
+      const toggle = document.getElementById('modeToggle');
+      const about = document.getElementById('about');
+      const skills = document.getElementById('skills');
+      const projects = document.getElementById('projects');
+      const experience = document.getElementById('experience');
+      const contact = document.getElementById('contact');
+      const edicion = document.getElementById('edicion');
+
+      const setDevMode = (isDev) => {
+        about.style.display = isDev ? '' : 'none';
+        skills.style.display = isDev ? '' : 'none';
+        projects.style.display = isDev ? '' : 'none';
+        experience.style.display = isDev ? '' : 'none';
+        contact.style.display = isDev ? '' : 'none';
+        edicion.style.display = isDev ? 'none' : '';
+      };
+
+      setDevMode(true);
+      toggle.addEventListener('change', () => setDevMode(!toggle.checked));
+    </script>
+  </body>
+</html>
