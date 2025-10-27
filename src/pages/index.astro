@@ -1,52 +1,51 @@
 ---
+import "../styles/global.css";
+
 import Toggle from '../components/Toggle.astro';
+import Footer from '../components/Footer.astro';
 import Develop from './develop.astro';
 import Edition from './edition.astro';
 ---
 
-<html lang="es">
+<html lang="es" class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-500">
   <head>
     <meta charset="UTF-8" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/archlinux/archlinux-original.svg">
-    <title>Portfolio – Moises Rebatta</title>
+    <title>Portfolio | Moise Rebatta</title>
   </head>
-  <body class="bg-slate-900 text-white font-sans">
+
+  <body class="font-sans flex flex-col min-h-screen text-center">
+
     <!-- HEADER -->
-    <header class="p-6 flex justify-between items-center border-b border-slate-700">
+    <header class="w-full border-b border-gray-300 dark:border-gray-800 p-6 flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-4">
       <h1 class="text-2xl font-bold">Moises Rebatta</h1>
       <Toggle />
     </header>
 
     <!-- MAIN -->
-    <main class="max-w-5xl mx-auto p-6 space-y-12">
+    <main class="flex-grow container mx-auto px-6 py-10">
       <Develop />
       <Edition />
-
     </main>
 
-    <!-- SCRIPT TOGGLE -->
-    <script>
-      
+    <Footer />
+    <!-- Script para el toggle -->
+    <script is:inline>
       const toggle = document.getElementById('modeToggle');
-      const about = document.getElementById('about');
-      const skills = document.getElementById('skills');
-      const projects = document.getElementById('projects');
-      const experience = document.getElementById('experience');
-      const contact = document.getElementById('contact');
-      const edicion = document.getElementById('edicion');
+      const devSection = document.getElementById('desarrollo');
+      const editSection = document.getElementById('edicion');
 
-      const setDevMode = (isDev) => {
-        about.style.display = isDev ? '' : 'none';
-        skills.style.display = isDev ? '' : 'none';
-        projects.style.display = isDev ? '' : 'none';
-        experience.style.display = isDev ? '' : 'none';
-        contact.style.display = isDev ? '' : 'none';
-        edicion.style.display = isDev ? 'none' : '';
-      };
-
-      setDevMode(true);
-      toggle.addEventListener('change', () => setDevMode(!toggle.checked));
+      toggle?.addEventListener('change', () => {
+        const isEdit = toggle.checked;
+        if (isEdit) {
+          devSection.classList.add('hidden');
+          editSection.classList.remove('hidden');
+        } else {
+          devSection.classList.remove('hidden');
+          editSection.classList.add('hidden');
+        }
+      });
     </script>
   </body>
 </html>

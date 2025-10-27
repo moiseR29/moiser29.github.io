@@ -55,17 +55,19 @@ const skills = [
   { name: "AWS", icon: "/images/aws_dark.svg" },
   { name: "Docker", icon: "/images/docker.svg" },
   { name: "CircleCI", icon: "/images/circleci-svgrepo-com.svg" },
-  { name: "Linux", icon: "/images/linux.svg" },
   { name: "PostgresSql", icon: "/images/postgresql.svg" },
+  { name: "Redis", icon: "/images/redis.svg" },
   { name: "Terraform", icon: "/images/terraform.svg" },
-  { name: "Python", icon: "/images/python.svg" },
-  { name: "GO", icon: "/images/golang.svg" },
-  { name: "Bash", icon: "/images/bash.svg" },
+  { name: "Linux", icon: "/images/linux.svg" },
   { name: "Kubernetes", icon: "/images/kubernetes.svg" },
-  { name: "NestJS", icon: "/images/nestjs.svg" },
+  { name: "Bash", icon: "/images/bash_l.svg" },
   { name: "Git", icon: "/images/git.svg" },
   { name: "MongoDB", icon: "/images/mongodb-logo-svgrepo-com.svg" },
   { name: "MySql", icon: "/images/mysql-wordmark-light.svg" },
+  { name: "GO", icon: "/images/golang.svg" },
+  { name: "Python", icon: "/images/python.svg" },
+  { name: "NestJS", icon: "/images/nestjs.svg" },
+  { name: "GraphQL", icon: "/images/graphql.svg" },
 ];
 
 const experiences = [
@@ -101,9 +103,7 @@ const experiences = [
 ];
 ---
 
-
-
-      <!-- SOBRE MI -->
+<!--
       <section id="about" class="text-center">
         <h2 class="text-3xl font-semibold mb-4">Sobre mí</h2>
         <p class="text-gray-300 leading-relaxed max-w-2xl mx-auto">
@@ -113,7 +113,6 @@ const experiences = [
         </p>
       </section>
 
-      <!-- TECH SKILLS -->
       <section id="skills" class="text-center">
         <h2 class="text-3xl font-semibold mb-6">Tech Skills</h2>
         <div class="flex flex-wrap justify-center gap-6">
@@ -126,7 +125,6 @@ const experiences = [
         </div>
       </section>
 
-      <!-- PROYECTOS -->
       <section id="projects">
         <h2 class="text-3xl font-semibold mb-6 text-center">Proyectos destacados</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -134,7 +132,6 @@ const experiences = [
         </div>
       </section>
 
-      <!-- EXPERIENCIA -->
       <section id="experience">
         <h2 class="text-3xl font-semibold mb-6 text-center">Experiencia</h2>
 
@@ -142,17 +139,14 @@ const experiences = [
         
          {experiences.map(exp => (
            <div class="relative flex flex-col sm:flex-row sm:items-start sm:justify-between">
-             <!-- Punto del timeline -->
              <span class="absolute -left-4 top-2 w-3 h-3 bg-indigo-500 rounded-full"></span>
             
-             <!-- Contenido principal -->
              <div class="sm:w-3/4">
                <h3 class="text-xl font-semibold text-indigo-400">{exp.company} | {exp.role}</h3>
                <p class="text-white-300 text-xxl mb-1">{exp.description}</p>
                <p class="text-gray-300 text-sm leading-relaxed">{exp.techs}</p>
              </div>
             
-             <!-- Fecha alineada a la derecha -->
              <div class="sm:w-1/4 sm:text-right mt-2 sm:mt-0">
                <p class="text-indigo-300 text-sm">{exp.date}</p>
              </div>
@@ -161,7 +155,6 @@ const experiences = [
        </div>
       </section>
 
-      <!-- CONTACTO -->
       <section id="contact" class="text-center space-y-4">
         <h2 class="text-3xl font-semibold mb-2">Contacto</h2>
         <p class="text-gray-400">Podés encontrarme en:</p>
@@ -177,3 +170,61 @@ const experiences = [
           </a>
         </div>
       </section>
+ -->
+
+
+
+
+<!-- DESARROLLO -->
+<section id="desarrollo" class="space-y-16">
+  <!-- Presentación -->
+  <div>
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">Sobre mí</h2>
+    <p class="max-w-3xl mx-auto text-base md:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+      Soy desarrollador backend con más de 6 años de experiencia construyendo sistemas escalables, seguros y mantenibles.
+      Me especializo en el desarrollo de APIs, microservicios y automatizaciones sobre infraestructura cloud.
+      He trabajado en migraciones de monolitos a arquitecturas de microservicios basadas en eventos, integrando servicios externos, desarrollando librerías especificas para Apis, optimizando pipelines de CI/CD, entre otros.
+    </p>
+  </div>
+
+  <!-- Skills -->
+  <div>
+    <h3 class="text-2xl font-bold mb-6">Tech Skills</h3>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 place-items-center">
+      {skills.map(skill => (
+        <div class="flex flex-col items-center gap-2">
+          <img src={skill.icon} alt={skill.name} class="w-10 h-10" />
+          <span class="text-sm font-medium">{skill.name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Proyectos -->
+  <div>
+    <h3 class="text-2xl font-bold mb-6">Proyectos destacados</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projects.map((p) => <ProjectCard {...p} />)}
+    </div>
+  </div>
+
+<!-- Experiencia -->
+<div>
+  <h3 class="text-2xl font-bold mb-6">Experiencia</h3>
+  <div class="flex flex-col gap-4">
+
+    {experiences.map(exp => (
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center bg-gray-100 dark:bg-gray-800 p-4 rounded-lg text-left">
+        <div class="flex-1">
+          <h4 class="text-lg font-semibold">{exp.company}</h4>
+          <p class="text-gray-700 dark:text-gray-300 text-sm font-medium">{exp.role}</p>
+          <p class="text-gray-600 dark:text-gray-400 text-sm mt-1">{exp.description}</p>
+          <p class="text-gray-500 dark:text-gray-400 text-sm mt-1 italic">{exp.techs}</p>
+        </div>
+        <span class="text-gray-500 mt-3 md:mt-0 md:ml-6 whitespace-nowrap text-sm self-end md:self-center">{exp.date}</span>
+      </div>
+    ))}
+
+  </div>
+</div>
+</section>

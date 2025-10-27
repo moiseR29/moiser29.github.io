@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --------------------------------------------------
+   ESTILOS GLOBALES
+-------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Tema oscuro automático (según el sistema) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+/* Transición suave entre modos */
+body {
+  @apply transition-colors duration-500 ease-in-out;
+}
+
+/* Texto por defecto */
+h1, h2, h3, h4, h5 {
+  @apply font-semibold;
+}
+
+p {
+  @apply leading-relaxed;
+}
+
+/* Limitar ancho del contenido principal */
+.container {
+  @apply max-w-6xl mx-auto;
+}
+
+/* Estilos del switch Desarrollo/Edición */
+#modeToggle + div {
+  position: relative;
+}
+
+#modeToggle + div::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: white;
+  transition: transform 0.3s ease;
+}
+
+#modeToggle:checked + div::after {
+  transform: translateX(20px);
+}
