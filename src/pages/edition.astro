@@ -1,8 +1,346 @@
+---
+// Imágenes de background para las secciones (opcional - deja vacío si no quieres background)
+const backgroundImages = {
+  sobreMi: "", // Ejemplo: "/images/background-sobre-mi.jpg"
+  reels: "", // Ejemplo: "/images/background-reels.jpg"
+  youtube: "" // Ejemplo: "/images/background-youtube.jpg"
+};
+
+// Datos de ejemplo - reemplaza con tus propios reels y videos
+const reels = [
+  {
+    id: "reel-1",
+    url: "https://www.instagram.com/reel/EXAMPLE1/embed/",
+    title: "Reel 1"
+  },
+  {
+    id: "reel-2", 
+    url: "https://www.instagram.com/reel/EXAMPLE2/embed/",
+    title: "Reel 2"
+  },
+  {
+    id: "reel-3",
+    url: "https://www.instagram.com/reel/EXAMPLE3/embed/",
+    title: "Reel 3"
+  }
+];
+
+const youtubeVideos = [
+  {
+    id: "video-1",
+    videoId: "dQw4w9WgXcQ", // Reemplaza con tu video ID de YouTube
+    title: "Video 1"
+  },
+  {
+    id: "video-2",
+    videoId: "dQw4w9WgXcQ", // Reemplaza con tu video ID de YouTube
+    title: "Video 2"
+  },
+  {
+    id: "video-3",
+    videoId: "dQw4w9WgXcQ", // Reemplaza con tu video ID de YouTube
+    title: "Video 3"
+  }
+];
+---
 
 <!-- EDICIÓN -->
-<section id="edicion" class="hidden">
-  <h2 class="text-3xl md:text-4xl font-bold mb-4">🎬 Edición de Video</h2>
-  <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-    Esta sección está en construcción 🚧. Próximamente vas a poder ver mis trabajos de edición y motion design.
-  </p>
+<section id="edicion" class="space-y-16">
+  <!-- Presentación -->
+  <div 
+    class="relative rounded-lg p-8 md:p-12"
+    style={backgroundImages.sobreMi ? `background-image: url('${backgroundImages.sobreMi}'); background-size: cover; background-position: center; background-repeat: no-repeat;` : ''}
+  >
+    {backgroundImages.sobreMi && (
+      <div class="absolute inset-0 bg-black/50 dark:bg-black/60 rounded-lg"></div>
+    )}
+    <div class="relative z-10">
+      <h2 class={`text-3xl md:text-4xl font-bold mb-4 ${backgroundImages.sobreMi ? 'text-white' : ''}`}>🎬 Edición de Video</h2>
+      <p class={`max-w-3xl mx-auto text-base md:text-lg leading-relaxed ${backgroundImages.sobreMi ? 'text-gray-100' : 'text-gray-600 dark:text-gray-300'}`}>
+        Estoy dando mis primeros pasos como editor de videos. 
+        Impulsado y motivado por mi proyecto personal: contar mi viaje que ya hice en moto a Perú y el proximo rumbo al Mundial. <br>
+        Ese desafío me impulsó a aprender, mejorar y descubrir lo mucho que disfruto editar. <br>
+        Hoy escribo mis propios guiones y trabajo con material que me comparten.
+        Utilizo DaVinci Resolve y estoy comprometido a seguir creciendo para dedicarme por completo al mundo audiovisual.
+        Mi pasado como programador también forma parte del proceso: lo uso para organizar ideas, estructurar narrativas y optimizar mi flujo de trabajo.
+      </p>
+    </div>
+  </div>
+
+  <!-- Carrusel de Reels -->
+  <div 
+    class="relative rounded-lg p-8 md:p-12"
+    style={backgroundImages.reels ? `background-image: url('${backgroundImages.reels}'); background-size: cover; background-position: center; background-repeat: no-repeat;` : ''}
+  >
+    {backgroundImages.reels && (
+      <div class="absolute inset-0 bg-black/50 dark:bg-black/60 rounded-lg"></div>
+    )}
+    <div class="relative z-10">
+      <h3 class={`text-2xl font-bold mb-6 ${backgroundImages.reels ? 'text-white' : ''}`}>📱 Reels</h3>
+      <div class="relative max-w-4xl mx-auto">
+      <div id="reelsCarousel" class="overflow-hidden rounded-lg">
+        <div id="reelsContainer" class="flex gap-2 transition-transform duration-500 ease-in-out">
+          {reels.map((reel, index) => (
+            <div 
+              class="min-w-full sm:min-w-[calc(50%-0.25rem)] flex-shrink-0"
+              data-reel-index={index}
+            >
+              <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-2 sm:p-3 aspect-[9/16] flex items-center justify-center max-w-xs mx-auto sm:max-w-none">
+                <iframe
+                  src={reel.url}
+                  class="w-full h-full rounded-lg"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  loading="lazy"
+                ></iframe>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <!-- Botones de navegación Reels -->
+      <button
+        id="reelsPrevBtn"
+        class="absolute left-2 top-1/2 -translate-y-1/2 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 rounded-full p-2 hover:bg-gray-700 dark:hover:bg-gray-300 transition z-10 shadow-lg opacity-80 hover:opacity-100"
+        aria-label="Reel anterior"
+      >
+        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button
+        id="reelsNextBtn"
+        class="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 rounded-full p-2 hover:bg-gray-700 dark:hover:bg-gray-300 transition z-10 shadow-lg opacity-80 hover:opacity-100"
+        aria-label="Siguiente reel"
+      >
+        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      <!-- Indicadores Reels -->
+      <div class="flex justify-center gap-2 mt-4">
+        {reels.map((_, index) => (
+          <button
+            class={`reels-indicator w-2 h-2 rounded-full transition ${
+              index === 0 ? 'bg-indigo-500' : 'bg-gray-300 dark:bg-gray-600'
+            }`}
+            data-reel-indicator={index}
+            aria-label={`Ir al reel ${index + 1}`}
+          ></button>
+        ))}
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carrusel de Videos de YouTube -->
+  <div 
+    class="relative rounded-lg p-8 md:p-12"
+    style={backgroundImages.youtube ? `background-image: url('${backgroundImages.youtube}'); background-size: cover; background-position: center; background-repeat: no-repeat;` : ''}
+  >
+    {backgroundImages.youtube && (
+      <div class="absolute inset-0 bg-black/50 dark:bg-black/60 rounded-lg"></div>
+    )}
+    <div class="relative z-10">
+      <h3 class={`text-2xl font-bold mb-6 ${backgroundImages.youtube ? 'text-white' : ''}`}>🎥 Videos de YouTube</h3>
+      <div class="relative">
+      <div id="youtubeCarousel" class="overflow-hidden rounded-lg">
+        <div id="youtubeContainer" class="flex transition-transform duration-500 ease-in-out">
+          {youtubeVideos.map((video, index) => (
+            <div 
+              class="min-w-full flex-shrink-0 px-2"
+              data-video-index={index}
+            >
+              <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 aspect-video">
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.videoId}`}
+                  class="w-full h-full rounded-lg"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  loading="lazy"
+                ></iframe>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <!-- Botones de navegación YouTube -->
+      <button
+        id="youtubePrevBtn"
+        class="absolute left-2 top-1/2 -translate-y-1/2 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 rounded-full p-2 hover:bg-gray-700 dark:hover:bg-gray-300 transition z-10 shadow-lg opacity-80 hover:opacity-100"
+        aria-label="Video anterior"
+      >
+        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button
+        id="youtubeNextBtn"
+        class="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 rounded-full p-2 hover:bg-gray-700 dark:hover:bg-gray-300 transition z-10 shadow-lg opacity-80 hover:opacity-100"
+        aria-label="Siguiente video"
+      >
+        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      <!-- Indicadores YouTube -->
+      <div class="flex justify-center gap-2 mt-4">
+        {youtubeVideos.map((_, index) => (
+          <button
+            class={`youtube-indicator w-2 h-2 rounded-full transition ${
+              index === 0 ? 'bg-indigo-500' : 'bg-gray-300 dark:bg-gray-600'
+            }`}
+            data-video-indicator={index}
+            aria-label={`Ir al video ${index + 1}`}
+          ></button>
+        ))}
+      </div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<script is:inline>
+  // Inicializar carruseles cuando el DOM esté listo
+  document.addEventListener('DOMContentLoaded', () => {
+    // Carrusel de Reels
+    let currentReelIndex = 0;
+    const reelsContainer = document.getElementById('reelsContainer');
+    const reelsPrevBtn = document.getElementById('reelsPrevBtn');
+    const reelsNextBtn = document.getElementById('reelsNextBtn');
+    const reelsIndicators = document.querySelectorAll('.reels-indicator');
+    const totalReels = reelsIndicators.length;
+
+    function getReelsPerView() {
+      return window.innerWidth >= 640 ? 2 : 1; // sm breakpoint de Tailwind
+    }
+
+    function getMaxReelIndex() {
+      const reelsPerView = getReelsPerView();
+      return Math.max(0, totalReels - reelsPerView);
+    }
+
+    function updateReelsCarousel() {
+      if (reelsContainer) {
+        const reelsPerView = getReelsPerView();
+        const firstReel = reelsContainer.querySelector(`[data-reel-index="${currentReelIndex}"]`);
+        
+        if (firstReel) {
+          const containerWidth = reelsContainer.offsetWidth;
+          const reelWidth = firstReel.offsetWidth;
+          const gap = 8; // gap-2 = 0.5rem = 8px
+          const translateX = currentReelIndex * (reelWidth + gap);
+          reelsContainer.style.transform = `translateX(-${translateX}px)`;
+        } else {
+          // Fallback al método porcentual
+          const translateX = currentReelIndex * (100 / reelsPerView);
+          reelsContainer.style.transform = `translateX(-${translateX}%)`;
+        }
+      }
+      
+      // Actualizar indicadores - mostrar activo el primer reel visible
+      reelsIndicators.forEach((indicator, index) => {
+        if (index === currentReelIndex) {
+          indicator.classList.add('bg-indigo-500');
+          indicator.classList.remove('bg-gray-300', 'dark:bg-gray-600');
+        } else {
+          indicator.classList.remove('bg-indigo-500');
+          indicator.classList.add('bg-gray-300', 'dark:bg-gray-600');
+        }
+      });
+    }
+
+    if (reelsPrevBtn) {
+      reelsPrevBtn.addEventListener('click', () => {
+        const reelsPerView = getReelsPerView();
+        currentReelIndex = Math.max(0, currentReelIndex - reelsPerView);
+        updateReelsCarousel();
+      });
+    }
+
+    if (reelsNextBtn) {
+      reelsNextBtn.addEventListener('click', () => {
+        const reelsPerView = getReelsPerView();
+        const maxIndex = getMaxReelIndex();
+        currentReelIndex = Math.min(maxIndex, currentReelIndex + reelsPerView);
+        updateReelsCarousel();
+      });
+    }
+
+    reelsIndicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        const maxIndex = getMaxReelIndex();
+        currentReelIndex = Math.min(index, maxIndex);
+        updateReelsCarousel();
+      });
+    });
+
+    // Inicializar carrusel al cargar (con un pequeño delay para asegurar que las dimensiones estén calculadas)
+    setTimeout(() => {
+      updateReelsCarousel();
+    }, 100);
+
+    // Ajustar carrusel cuando cambia el tamaño de ventana
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const maxIndex = getMaxReelIndex();
+        if (currentReelIndex > maxIndex) {
+          currentReelIndex = maxIndex;
+        }
+        updateReelsCarousel();
+      }, 150);
+    });
+
+    // Carrusel de YouTube
+    let currentVideoIndex = 0;
+    const youtubeContainer = document.getElementById('youtubeContainer');
+    const youtubePrevBtn = document.getElementById('youtubePrevBtn');
+    const youtubeNextBtn = document.getElementById('youtubeNextBtn');
+    const youtubeIndicators = document.querySelectorAll('.youtube-indicator');
+    const totalVideos = youtubeIndicators.length;
+
+    function updateYoutubeCarousel() {
+      if (youtubeContainer) {
+        youtubeContainer.style.transform = `translateX(-${currentVideoIndex * 100}%)`;
+      }
+      youtubeIndicators.forEach((indicator, index) => {
+        if (index === currentVideoIndex) {
+          indicator.classList.add('bg-indigo-500');
+          indicator.classList.remove('bg-gray-300', 'dark:bg-gray-600');
+        } else {
+          indicator.classList.remove('bg-indigo-500');
+          indicator.classList.add('bg-gray-300', 'dark:bg-gray-600');
+        }
+      });
+    }
+
+    if (youtubePrevBtn) {
+      youtubePrevBtn.addEventListener('click', () => {
+        currentVideoIndex = (currentVideoIndex - 1 + totalVideos) % totalVideos;
+        updateYoutubeCarousel();
+      });
+    }
+
+    if (youtubeNextBtn) {
+      youtubeNextBtn.addEventListener('click', () => {
+        currentVideoIndex = (currentVideoIndex + 1) % totalVideos;
+        updateYoutubeCarousel();
+      });
+    }
+
+    youtubeIndicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        currentVideoIndex = index;
+        updateYoutubeCarousel();
+      });
+    });
+  });
+</script>

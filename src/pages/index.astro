@@ -36,6 +36,13 @@ import Edition from './edition.astro';
       const devSection = document.getElementById('desarrollo');
       const editSection = document.getElementById('edicion');
 
+      // Inicializar con edición visible por defecto
+      if (toggle && devSection && editSection) {
+        toggle.checked = true;
+        devSection.classList.add('hidden');
+        editSection.classList.remove('hidden');
+      }
+
       toggle?.addEventListener('change', () => {
         const isEdit = toggle.checked;
         if (isEdit) {
